@@ -12,17 +12,21 @@ class text_extract:
         return img
    
     def ext_address(self, txt):
-        text = txt.replace('!', '').replace('', '').replace('#', '').replace('@', '').lstrip().rstrip().replace(']', '').replace('[', '').replace('<', '').replace(')', '').splitlines()
-        ext = []
-        for i in text:
-            if 'ঠিকানা' in i:
-                ext.append(i.replace('\n', ''))
-            elif 'ডাকঘর' in i:
-                ext.append(i.replace('\n', ''))
-            elif 'উপশহর' in i:
-                ext.append(i.replace('\n', ''))
-        adrs = ' '.join(ext)
-        return adrs
+        try:    
+            text = txt.replace('!', '').replace('', '').replace('#', '').replace('@', '').lstrip().rstrip().replace(']', '').replace('[', '').replace('<', '').replace(')', '').splitlines()
+            ext = []
+            for i in text:
+                if 'ঠিকানা' in i:
+                    ext.append(i.replace('\n', ''))
+                elif 'ডাকঘর' in i:
+                    ext.append(i.replace('\n', ''))
+                elif 'উপশহর' in i:
+                    ext.append(i.replace('\n', ''))
+            adrs = ' '.join(ext)
+            return adrs
+        except:
+            print('Unable to operate on string')
+            return None
         
     def img2txt(self, img_path, lang, apply_filter=False, exe_time=False):
         try:
